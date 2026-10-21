@@ -12,6 +12,8 @@
                 <a href="{{ route('dashboard') }}">Dashboard</a>
                 |
                 <a href="{{ route('surat-masuk.index') }}">Surat Masuk</a>
+                |
+                <a href="{{ route('surat-keluar.index') }}">Surat Keluar</a>
             </nav>
             <hr>
         </header>
