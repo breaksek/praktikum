@@ -16,5 +16,7 @@ Route::middleware('auth')->group(function() {
     Route::resource('surat-masuk', SuratMasukController::class)->parameters(['surat-masuk' => 'id']);
     Route::resource('surat-keluar', SuratKeluarController::class)->parameters(['surat-keluar' => 'id']);
     //Route::resource('surat-masuk', SuratMasukController::class)->only(['index', 'show'])->parameters(['surat-masuk' => 'id']);
-    //Route::resource('surat-masuk', SuratMasukController::class)->except(['index', 'show'])->parameters(['surat-masuk' => 'id'])->middleware('can:manage-letters');
+    Route::resource('surat-masuk', SuratMasukController::class)->except(['index', 'show'])->parameters(['surat-masuk' => 'id'])->middleware('can:manage-letters');
+    //Route::resource('surat-keluar', SuratKeluarController::class)->only(['index', 'show'])->parameters(['surat-keluar' => 'id']);
+    Route::resource('surat-keluar', SuratKeluarController::class)->except(['index', 'show'])->parameters(['surat-keluar' => 'id'])->middleware('can:manage-letters');
 });
