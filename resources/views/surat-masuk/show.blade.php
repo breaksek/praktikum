@@ -29,7 +29,12 @@
             <div class="flex items-center gap-3">
 
                 <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-6 h-6"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5v12.5H3.75z" />
                         <path stroke-linecap="round" stroke-linejoin="round" d="m4 7 8 6 8-6" />
                     </svg>
@@ -97,13 +102,44 @@
                     </dd>
                 </div>
 
+                {{-- KATEGORI --}}
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4">
+                    <dt class="text-sm font-semibold text-slate-500">
+                        Kategori
+                    </dt>
+
+                    <dd class="sm:col-span-2 text-sm text-slate-800">
+                        {{ $surat->category?->nama ?? 'Tanpa Kategori' }}
+                    </dd>
+                </div>
+
+                {{-- LAMPIRAN --}}
+                @if ($surat->lampiran)
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4">
+                        <dt class="text-sm font-semibold text-slate-500">
+                            Lampiran
+                        </dt>
+
+                        <dd class="sm:col-span-2 text-sm text-slate-800">
+                            <a
+                                href="{{ asset('storage/' . $surat->lampiran) }}"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-800 hover:underline transition"
+                            >
+                                Lihat Lampiran
+                            </a>
+                        </dd>
+                    </div>
+                @endif
+
                 {{-- KETERANGAN --}}
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4 last:pb-0">
                     <dt class="text-sm font-semibold text-slate-500">
                         Keterangan
                     </dt>
 
-                    <dd class="sm:col-span-2 text-sm leading-relaxed text-slate-800 whitespace-pre-line">
+                    <dd class="sm:col-span-2 text-sm leading-relaxed text-slate-800">
                         {{ $surat->keterangan }}
                     </dd>
                 </div>
@@ -119,7 +155,12 @@
                 href="{{ route('surat-masuk.index') }}"
                 class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 transition"
             >
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     class="w-4 h-4"
+                     fill="none"
+                     viewBox="0 0 24 24"
+                     stroke="currentColor"
+                     stroke-width="2">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7 7-7M3 12h18" />
                 </svg>
 
