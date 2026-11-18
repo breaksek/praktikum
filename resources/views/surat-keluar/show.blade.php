@@ -24,16 +24,35 @@
     {{-- DETAIL CARD --}}
     <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
 
-        <div class="px-6 py-5 border-b border-slate-200">
-            <h2 class="font-bold text-slate-800">
-                Informasi Surat
-            </h2>
+        {{-- CARD HEADER --}}
+        <div class="border-b border-slate-200 bg-slate-50 px-6 py-5">
+            <div class="flex items-center gap-3">
 
-            <p class="text-sm text-slate-500 mt-1">
-                Rincian data surat keluar.
-            </p>
+                <div class="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-100 text-blue-600">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         class="w-6 h-6"
+                         fill="none"
+                         viewBox="0 0 24 24"
+                         stroke="currentColor"
+                         stroke-width="1.8">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5v12.5H3.75z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="m4 7 8 6 8-6" />
+                    </svg>
+                </div>
+
+                <div>
+                    <h2 class="font-bold text-slate-800">
+                        Informasi Surat
+                    </h2>
+
+                    <p class="text-sm text-slate-500 mt-1">
+                        Rincian data surat masuk
+                    </p>
+                </div>
+
+            </div>
         </div>
-
+        
         <div class="p-6 space-y-5">
 
             {{-- NOMOR SURAT --}}
@@ -88,13 +107,45 @@
 
             <div class="border-t border-slate-100"></div>
 
+            {{-- KATEGORI --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
+                <dt class="text-sm font-semibold text-slate-500">
+                    Kategori
+                </dt>
+                <dd class="sm:col-span-2 font-medium text-sm text-slate-800">
+                    {{ $surat->category?->nama ?? 'Tanpa Kategori' }}
+                </dd>
+            </div>
+
+            <div class="border-t border-slate-100"></div>
+
+            {{-- LAMPIRAN --}}
+            @if ($surat->lampiran)
+                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4">
+                    <dt class="text-sm font-semibold text-slate-500">
+                        Lampiran
+                    </dt>
+
+                    <dd class="sm:col-span-2 text-sm text-slate-800">
+                        <a
+                            href="{{ asset('storage/' . $surat->lampiran) }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-800 hover:underline transition"
+                        >
+                            Lihat Lampiran
+                        </a>
+                    </dd>
+                </div>
+            @endif
+
             {{-- KETERANGAN --}}
             <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
                 <p class="text-sm font-semibold text-slate-500">
                     Keterangan
                 </p>
 
-                <p class="text-sm text-slate-700 sm:col-span-2 whitespace-pre-line">
+                <p class="text-sm font-medium text-slate-700 sm:col-span-2">
                     {{ $surat->keterangan }}
                 </p>
             </div>

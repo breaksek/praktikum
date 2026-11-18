@@ -22,7 +22,7 @@
     </div>
 
     {{-- DETAIL CARD --}}
-    <div class="overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-sm">
+    <div class="bg-white border border-slate-200 rounded-2xl shadow-sm overflow-hidden">
 
         {{-- CARD HEADER --}}
         <div class="border-b border-slate-200 bg-slate-50 px-6 py-5">
@@ -52,121 +52,114 @@
 
             </div>
         </div>
+        
+        <div class="p-6 space-y-5">
 
-        {{-- CARD CONTENT --}}
-        <div class="p-6">
+            {{-- NOMOR SURAT --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+                <p class="text-sm font-semibold text-slate-500">
+                    Nomor Surat
+                </p>
 
-            <dl class="divide-y divide-slate-100">
+                <p class="text-sm font-medium text-slate-800 sm:col-span-2">
+                    {{ $surat->nomor_surat }}
+                </p>
+            </div>
 
-                {{-- NOMOR SURAT --}}
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4 first:pt-0">
-                    <dt class="text-sm font-semibold text-slate-500">
-                        Nomor Surat
-                    </dt>
+            <div class="border-t border-slate-100"></div>
 
-                    <dd class="sm:col-span-2 text-sm font-semibold text-[#172554] break-words">
-                        {{ $surat->nomor_surat }}
-                    </dd>
-                </div>
+            {{-- TANGGAL --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+                <p class="text-sm font-semibold text-slate-500">
+                    Tanggal
+                </p>
 
-                {{-- TANGGAL --}}
+                <p class="text-sm font-medium text-slate-800 sm:col-span-2">
+                    {{ $surat->tanggal }}
+                </p>
+            </div>
+
+            <div class="border-t border-slate-100"></div>
+
+            {{-- PENGIRIM --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+                <p class="text-sm font-semibold text-slate-500">
+                    Pengirim
+                </p>
+
+                <p class="text-sm font-medium text-slate-800 sm:col-span-2">
+                    {{ $surat->pengirim }}
+                </p>
+            </div>
+
+            <div class="border-t border-slate-100"></div>
+
+            {{-- PERIHAL --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+                <p class="text-sm font-semibold text-slate-500">
+                    Perihal
+                </p>
+
+                <p class="text-sm font-medium text-slate-800 sm:col-span-2">
+                    {{ $surat->perihal }}
+                </p>
+            </div>
+
+            <div class="border-t border-slate-100"></div>
+
+            {{-- KATEGORI --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 sm:gap-4">
+                <dt class="text-sm font-semibold text-slate-500">
+                    Kategori
+                </dt>
+                <dd class="sm:col-span-2 font-medium text-sm text-slate-800">
+                    {{ $surat->category?->nama ?? 'Tanpa Kategori' }}
+                </dd>
+            </div>
+
+            <div class="border-t border-slate-100"></div>
+
+            {{-- LAMPIRAN --}}
+            @if ($surat->lampiran)
                 <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4">
                     <dt class="text-sm font-semibold text-slate-500">
-                        Tanggal
+                        Lampiran
                     </dt>
 
                     <dd class="sm:col-span-2 text-sm text-slate-800">
-                        {{ $surat->tanggal }}
+                        <a
+                            href="{{ asset('storage/' . $surat->lampiran) }}"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            class="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-800 hover:underline transition"
+                        >
+                            Lihat Lampiran
+                        </a>
                     </dd>
                 </div>
+            @endif
 
-                {{-- PENGIRIM --}}
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4">
-                    <dt class="text-sm font-semibold text-slate-500">
-                        Pengirim
-                    </dt>
+            {{-- KETERANGAN --}}
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4">
+                <p class="text-sm font-semibold text-slate-500">
+                    Keterangan
+                </p>
 
-                    <dd class="sm:col-span-2 text-sm text-slate-800">
-                        {{ $surat->pengirim }}
-                    </dd>
-                </div>
-
-                {{-- PERIHAL --}}
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4">
-                    <dt class="text-sm font-semibold text-slate-500">
-                        Perihal
-                    </dt>
-
-                    <dd class="sm:col-span-2 text-sm text-slate-800">
-                        {{ $surat->perihal }}
-                    </dd>
-                </div>
-
-                {{-- KATEGORI --}}
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4">
-                    <dt class="text-sm font-semibold text-slate-500">
-                        Kategori
-                    </dt>
-
-                    <dd class="sm:col-span-2 text-sm text-slate-800">
-                        {{ $surat->category?->nama ?? 'Tanpa Kategori' }}
-                    </dd>
-                </div>
-
-                {{-- LAMPIRAN --}}
-                @if ($surat->lampiran)
-                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4">
-                        <dt class="text-sm font-semibold text-slate-500">
-                            Lampiran
-                        </dt>
-
-                        <dd class="sm:col-span-2 text-sm text-slate-800">
-                            <a
-                                href="{{ asset('storage/' . $surat->lampiran) }}"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="inline-flex items-center gap-2 font-semibold text-blue-600 hover:text-blue-800 hover:underline transition"
-                            >
-                                Lihat Lampiran
-                            </a>
-                        </dd>
-                    </div>
-                @endif
-
-                {{-- KETERANGAN --}}
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 sm:gap-4 py-4 last:pb-0">
-                    <dt class="text-sm font-semibold text-slate-500">
-                        Keterangan
-                    </dt>
-
-                    <dd class="sm:col-span-2 text-sm leading-relaxed text-slate-800">
-                        {{ $surat->keterangan }}
-                    </dd>
-                </div>
-
-            </dl>
+                <p class="text-sm font-medium text-slate-700 sm:col-span-2">
+                    {{ $surat->keterangan }}
+                </p>
+            </div>
 
         </div>
 
         {{-- CARD FOOTER --}}
-        <div class="border-t border-slate-200 bg-slate-50 px-6 py-5">
-
+        <div class="px-6 py-5 bg-slate-50 border-t border-slate-200">
             <a
                 href="{{ route('surat-masuk.index') }}"
-                class="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-700 hover:bg-slate-100 transition"
+                class="inline-flex items-center justify-center rounded-xl bg-blue-600 px-5 py-3 text-sm font-semibold text-white shadow-lg shadow-blue-600/20 hover:bg-blue-700 transition"
             >
-                <svg xmlns="http://www.w3.org/2000/svg"
-                     class="w-4 h-4"
-                     fill="none"
-                     viewBox="0 0 24 24"
-                     stroke="currentColor"
-                     stroke-width="2">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7 7-7M3 12h18" />
-                </svg>
-
                 Kembali ke Daftar Surat
             </a>
-
         </div>
 
     </div>

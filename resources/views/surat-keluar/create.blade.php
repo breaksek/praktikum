@@ -34,7 +34,12 @@
             </p>
         </div>
 
-        <form action="{{ route('surat-keluar.store') }}" method="POST" class="p-6 space-y-6">
+        <form
+            action="{{ route('surat-keluar.store') }}"
+            method="POST"
+            enctype="multipart/form-data"
+            class="p-6 space-y-6"
+        >
             @csrf
 
             <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -126,6 +131,36 @@
                     @enderror
                 </div>
 
+                {{-- KATEGORI --}}
+                <div class="md:col-span-2">
+                    <label for="category_id" class="block text-sm font-semibold text-slate-700 mb-2">
+                        Kategori Surat
+                    </label>
+
+                    <select
+                        id="category_id"
+                        name="category_id"
+                        class="w-full rounded-xl border border-slate-300 bg-white px-4 py-3 text-sm text-slate-800 outline-none transition focus:border-blue-500 focus:ring-4 focus:ring-blue-500/10 @error('category_id') border-red-400 @enderror"
+                    >
+                        <option value="">-- Tanpa kategori --</option>
+
+                        @foreach ($categories as $kategori)
+                            <option
+                                value="{{ $kategori->id }}"
+                                @selected(old('category_id', $surat->category_id ?? '') == $kategori->id)
+                            >
+                                {{ $kategori->nama }}
+                            </option>
+                        @endforeach
+                    </select>
+
+                    @error('category_id')
+                        <p class="mt-2 text-sm text-red-600">
+                            {{ $message }}
+                        </p>
+                    @enderror
+                </div>
+
             </div>
 
             {{-- KETERANGAN --}}
@@ -143,6 +178,33 @@
                 >{{ old('keterangan') }}</textarea>
 
                 @error('keterangan')
+                    <p class="mt-2 text-sm text-red-600">
+                        {{ $message }}
+                    </p>
+                @enderror
+            </div>
+
+            {{-- LAMPIRAN --}}
+            <div>
+                <label for="lampiran" class="block text-sm font-semibold text-slate-700 mb-2">
+                    Lampiran
+                </label>
+
+                <div class="rounded-xl border border-dashed border-slate-300 bg-slate-50 p-4">
+                    <input
+                        type="file"
+                        id="lampiran"
+                        name="lampiran"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        class="block w-full text-sm text-slate-600 file:mr-4 file:rounded-lg file:border-0 file:bg-blue-50 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-blue-700 hover:file:bg-blue-100"
+                    >
+
+                    <p class="mt-2 text-xs text-slate-500">
+                        Format yang didukung: PDF, JPG, JPEG, PNG. Maksimal ukuran file 2 MB.
+                    </p>
+                </div>
+
+                @error('lampiran')
                     <p class="mt-2 text-sm text-red-600">
                         {{ $message }}
                     </p>
